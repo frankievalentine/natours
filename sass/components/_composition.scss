@@ -1,0 +1,47 @@
+.composition {
+    position: relative;
+
+    // with images define percentages for flexibility and responsiveness
+    // z-index included for transform/transition on images to appear closer
+    // outline offset on parent to give space between border and images
+    &__photo {
+        width: 55%;
+        box-shadow: 0 1.5rem 4rem rgba($color-black, .4);
+        border-radius: 2px;
+        position: absolute;
+        z-index: 10;
+        transition: all .2s;
+        // outline-offset: 1rem;
+
+        &--p1 {
+            left: 0;
+            top: -2rem;
+        }
+        
+        // starting 0px from the right side and 2 from top
+        &--p2 {
+            right: 0;
+            top: 2rem;
+        }
+
+        &--p3 {
+            left: 20%;
+            top: 10rem;
+        }
+
+        // outline similar to border
+        // scale and translate up when hovered
+        &:hover {
+            // outline: 1rem solid $color-grey-dark;
+            transform: scale(1.05) translateY(-.5rem);
+            box-shadow: 0 2.5rem 4rem rgba($color-black, .5);
+            z-index: 20;
+        }
+
+        // hover composition then select photo nested then select not hovered
+        // composition:hover composition__photo:not(:hover)
+        &:hover &__photo:not(:hover) {
+            transform: scale(.95);
+        }
+    }
+}
