@@ -1,0 +1,106 @@
+.popup {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba($color-black, .8);
+    z-index: 9999;
+    // hide the popup initially
+    opacity: 0;
+    visibility: hidden;
+    // animate the popup when target is clicked
+    transition: all .3s;
+
+    &__content {
+        // absolute center includes a transform, only one allowed in one declaration block
+        @include absCenter;
+
+        width: 75%;
+        background-color: $color-white;
+        box-shadow: 0 2rem 4rem rgba($color-black, .2);
+        border-radius: 3px;
+        // content functions as the table and left and right are table cells
+        display: table;
+        overflow: hidden;
+        // repeat the translate and it will override the absolute center transform
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(.25);
+        // transition-delay added at the end
+        transition: all .5s .2s;
+    }
+
+    &__left {
+        width: 33.333333%;
+        display: table-cell;
+    }
+
+    &__right {
+        width: 66.666667%;
+        display: table-cell;
+        // align the side necessary for the middle of the height of the cell
+        vertical-align: middle;
+        padding: 3rem 5rem;
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+    }
+
+    &__text {
+        font-size: 1.4rem;
+        margin-bottom: 4rem;
+
+        -moz-column-count: 2;
+        -moz-column-gap: 4rem;
+        -moz-column-rule: 1px solid $color-grey-light-2;
+
+        // column layout: default gap is 1em = 14px 1em is always the font-size of the current element
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: 1px solid $color-grey-light-2;
+
+        // automatically figures out where to place the hypens in your text from HTML
+        -moz-hyphens: auto;
+        -ms-hypens: auto;
+        -webkit-hyphens: auto;
+        hyphens: auto;
+    }
+
+    // POPUP OPEN STATE
+    // pseudo class that allows us to select the id in HTML of the target parent in this case the popup
+    // also needs transition on the parent
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    // popup becomes target and style the child element content
+    &:target &__content {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    // POPUP CLOSE STATE
+    // closing button to remove the target pseudo class
+    &__close {
+        &:link,
+        &:visited {
+            color: $color-grey-dark;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-size: 3rem;
+            text-decoration: none;
+            display: inline-block;
+            transition: all .2;
+            // text has predefined line height so it must be set to 1
+            line-height: 1;
+        }
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+}
