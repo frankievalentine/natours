@@ -28,11 +28,32 @@
         transform: translate(-50%, -50%) scale(.25);
         // transition-delay added at the end
         transition: all .5s .2s;
+
+        @include respond(tab-land) {
+            width: auto;
+        }
+
+        @include respond(tab-port) {
+            width: auto;
+        }
+
+        @include respond(phone) {
+            display: block;
+            position: relative;
+        }
     }
 
     &__left {
         width: 33.333333%;
         display: table-cell;
+
+        @include respond(tab-port) {
+            vertical-align: middle;
+        }
+
+        @include respond(phone) {
+            display: block;
+        }
     }
 
     &__right {
@@ -46,6 +67,10 @@
     &__img {
         display: block;
         width: 100%;
+
+        @include respond(phone) {
+            display: none;
+        }
     }
 
     &__text {

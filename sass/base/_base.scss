@@ -8,9 +8,50 @@
 
 html {
     // Defines what 1rem is
-    font-size: 62.5%;
+    font-size: 62.5%; // 10px 10px/16px = 62.5
+    // makes entire layout dependent on font-size
+
+    // ems and rems in media queries are not affected by root font setting
+    // 1em or 1rem in a media query is browser default
+    // rems fail to work in browsers with media queries so ems are best
+
+    // 1em = 16px coversion px/16
+
+    // CONTENT DIRECTIVE
+    // Include the mixin that contains content directive and pass in this code
+    // @include respond-phone {
+    //     font-size: 50%;
+    // }
+    
+    // IF DIRECTIVE
+    // Include mixins that contain if directive for each breakpoint
+
+    // Phone breakpoint not necessary in html because tab-port asks question <= 900px
+    // Phone breakpoints are added on each element using the if directive mixins
+    // @include respond(phone) {
+    //     font-size: 50%;
+    // }
+
+    // lower percentage applies to the relevant screen size aka 700px is closer to 900px breakpoint
+
+    @include respond(tab-land) { // width < 1200
+        font-size: 56.25%; // 1rem = 9px, 9/16 = 56.25%
+    }
+
+    @include respond(tab-port) { // width < 900
+        font-size: 50%; // 1rem = 8px, 8/16 = 50%
+    }
+
+    @include respond(big-desktop) {
+        font-size: 75%; // 1rem = 12px, 12/16 = 75%
+    }
 }
 
 body {
     box-sizing: border-box;
+    padding: 3rem;
+
+    @include respond(tab-port) {
+        padding: 0;
+    }
 }
