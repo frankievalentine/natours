@@ -1,6 +1,6 @@
 .popup {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     position: fixed;
     top: 0;
     left: 0;
@@ -11,6 +11,13 @@
     visibility: hidden;
     // animate the popup when target is clicked
     transition: all .3s;
+
+    // Safari backdrop filter support
+    @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: blur(10px)) {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        background-color: rgba($color-black, .3);
+    }
 
     &__content {
         // absolute center includes a transform, only one allowed in one declaration block
